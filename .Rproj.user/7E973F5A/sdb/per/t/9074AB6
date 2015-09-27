@@ -1,0 +1,18 @@
+{
+    "contents" : "##Plotting + Exporting the plot to a 1000 x 1000 PNG\npng(filename = \"Plot3.png\", width = 1000, height = 1000)\n\n##Plotting by group in ggplot2.\nlibrary(ggplot2)\n\nggplot(NEI25balt,aes(year,`Emissions (Tons)`,fill=type))+\n    geom_bar(stat=\"identity\",alpha=0.8) +\n    facet_grid(.~type) +\n    theme(legend.position=\"none\") +\n    labs(x=\"Year\",title=\"Baltimore PM 2.5 Emissions by Type\") +\n    scale_fill_manual(values=c(\"red\",\"blue\",\"green\",\"brown\")) +\n    scale_x_continuous(breaks=c(1999,2002,2005,2008))\n    \ndev.off()\n\n##NON-ROAD has decreased, NONPOINT has decreased, ON-ROAD has decreased, and POINT has increased and then dropped off.",
+    "created" : 1443308653633.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1430894422",
+    "id" : "9074AB6",
+    "lastKnownWriteTime" : 1443380741,
+    "path" : "C:/Users/TotallyNotDanny/OneDrive/R/Exploratory Data Analysis/Week 3/Course Project 2/plot3.R",
+    "project_path" : "plot3.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

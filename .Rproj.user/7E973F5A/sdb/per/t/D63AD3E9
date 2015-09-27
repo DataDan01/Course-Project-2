@@ -1,0 +1,18 @@
+{
+    "contents" : "##Subsetting the data.\nNEI25balt<-subset(NEI25dat,fips==\"24510\")\n\n##Aggregating the data for the plot.\nNEI25baltagg<-aggregate(NEI25balt$`Emissions (Tons)`,by=list(NEI25balt$year), sum)\n\n##Plotting + Exporting the plot to a 1000 x 1000 PNG\npng(filename = \"Plot2.png\", width = 1000, height = 1000)\n\nplot(NEI25baltagg,\n     type=\"p\",\n     main=\"Total PM 2.5 Emissions in Baltimore 1999 - 2008\",\n     xlab=\"Year\",\n     ylab=\"Emissions (Tons)\",\n     pch=15,\n     col=\"blue\",\n     xaxt = 'n')\n\naxis(side = 1, at = c(1999,2002,2005,2008))\n\n\n##OLS line.\nline<-glm(NEI25baltagg$x~NEI25baltagg$Group.1)\nabline(line)\n\ndev.off()\n\n##Total emissions of PM 2.5 have somewhat decreased in the Baltimore from 1999 to 2008, with 2005 showing a large spike.",
+    "created" : 1443308262174.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2638740396",
+    "id" : "D63AD3E9",
+    "lastKnownWriteTime" : 1443381857,
+    "path" : "C:/Users/TotallyNotDanny/OneDrive/R/Exploratory Data Analysis/Week 3/Course Project 2/plot2.R",
+    "project_path" : "plot2.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

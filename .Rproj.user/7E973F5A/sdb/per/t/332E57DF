@@ -1,0 +1,18 @@
+{
+    "contents" : "##Download the data.\ndownload.file(url=\"https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip\",\n              destfile=\"./NEI25.zip\")\n##Read in the zip files.\nunzip(zipfile=\"./NEI25.zip\")\nNEI25dat<-readRDS(file=\"./summarySCC_PM25.rds\")\nNEI25class<-readRDS(file=\"./Source_Classification_Code.rds\")\n\n##Some tidying.\ncolnames(NEI25dat)[4]<-\"Emissions (Tons)\"\n\n##Aggregating the data for the plot.\nNEI25agg<-aggregate(NEI25dat$`Emissions (Tons)`,by=list(NEI25dat$year), sum)\nNEI25agg$x<-NEI25agg$x/1000000\n\n##Plotting + Exporting the plot to a 1000 x 1000 PNG\npng(filename = \"Plot1.png\", width = 1000, height = 1000)\n\nplot(NEI25agg,\n     type=\"p\",\n     main=\"Total PM 2.5 Emissions 1999 - 2008\",\n     xlab=\"Year\",\n     ylab=\"Emissions (Millions of Tons)\",\n     pch=15,\n     col=\"blue\",\n     xaxt = 'n')\n\naxis(side = 1, at = c(1999,2002,2005,2008))\n\n##OLS line.\nline<-glm(NEI25agg$x~NEI25agg$Group.1)\nabline(line)\n\ndev.off()\n\n##Total emissions of PM 2.5 have decreased in the United States from 1999 to 2008.",
+    "created" : 1443298557603.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1850698980",
+    "id" : "332E57DF",
+    "lastKnownWriteTime" : 1443380473,
+    "path" : "C:/Users/TotallyNotDanny/OneDrive/R/Exploratory Data Analysis/Week 3/Course Project 2/plot1.R",
+    "project_path" : "plot1.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

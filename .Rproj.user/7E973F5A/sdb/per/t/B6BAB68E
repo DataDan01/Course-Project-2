@@ -1,0 +1,17 @@
+{
+    "contents" : "##Subsetting for Baltimore and LA.\nNEI25compare<-subset(NEI25dat,(fips==\"24510\" |fips==\"06037\") & type==\"ON-ROAD\")\n\n##Changing the fips names to something easier.\nNEI25compare[NEI25compare$fips==\"24510\",1]=\"Baltimore\"\nNEI25compare[NEI25compare$fips==\"06037\",1]=\"Los Angeles\"\n\n\n##Plotting + Exporting the plot to a 1000 x 1000 PNG\npng(filename = \"Plot6.png\", width = 1000, height = 1000)\n\nlibrary(ggplot2)\n\nggplot(NEI25compare,aes(year,`Emissions (Tons)`,fill=fips))+\n    geom_bar(stat=\"identity\",alpha=0.8) +\n    facet_grid(.~fips) +\n    theme(legend.position=\"none\") +\n    labs(x=\"Year\",title=\"Baltimore vs. Los Angeles PM 2.5 Emissions by Type\") +\n    scale_fill_manual(values=c(\"red\",\"blue\")) +\n    scale_x_continuous(breaks=c(1999,2002,2005,2008))\n\ndev.off()\n\n##Baltimore's pollution levels have been decreasing while LA's levels have steadily climbed upwards and only started dropping off in 2008.",
+    "created" : 1443381450479.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3223035337",
+    "id" : "B6BAB68E",
+    "lastKnownWriteTime" : 1443381205,
+    "path" : "C:/Users/TotallyNotDanny/OneDrive/R/Exploratory Data Analysis/Week 3/Course Project 2/plot6.R",
+    "project_path" : "plot6.R",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

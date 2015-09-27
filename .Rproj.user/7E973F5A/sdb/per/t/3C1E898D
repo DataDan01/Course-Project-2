@@ -1,0 +1,18 @@
+{
+    "contents" : "##Let's look for the word \"coal\" in any of the columns that contain names/descriptions.\ncoalrows<-cbind(sapply(NEI25class[,3:10],grep,pattern=\"coal\"),\n            sapply(NEI25class[,3:10],grep,pattern=\"Coal\"),\n            sapply(NEI25class[,3:10],grep,pattern=\"/Coal\"))\n    \n##Converting the data into a vector and removing all repeats.\ncoalrows <-unlist(coalrows)\ncoalrows <-unique(coalrows)\n\n##Now let's do the same thing for \"combustion\".\ncombustionrows<-cbind(sapply(NEI25class[,3:10],grep,pattern=\"combustion\"),\n                sapply(NEI25class[,3:10],grep,pattern=\"Combustion\"),\n                sapply(NEI25class[,3:10],grep,pattern=\"/Combustion\"))\n\n##Converting the data into a vector and removing all repeats.\ncombustionrows <-unlist(combustionrows)\ncombustionrows <-unique(combustionrows)\n\n##Extracting the rows which have anything to do with both coal and combustion.\nintersectrows<-intersect(coalrows,combustionrows)\n\n##Getting the SCC codes and then using that to subset NEI25dat.\nNEI25class$SCC<-as.character(NEI25class$SCC)\nSCCcodescoal<-NEI25class$SCC[intersectrows]\n\nNEI25coalsub<-subset(NEI25dat,SCC==SCCcodescoal)\n\n##Aggregating by year.\nNEI25coalagg<-aggregate(NEI25coalsub$`Emissions (Tons)`,by=list(NEI25coalsub$year), sum)\n\n\n##Plotting + Exporting the plot to a 1000 x 1000 PNG\npng(filename = \"Plot4.png\", width = 1000, height = 1000)\n\nplot(NEI25coalagg,\n     type=\"p\",\n     main=\"Total PM 2.5 Emissions in from Coal Combustion 1999 - 2008\",\n     xlab=\"Year\",\n     ylab=\"Emissions (Tons)\",\n     pch=15,\n     col=\"blue\",\n     xaxt = 'n')\n\naxis(side = 1, at = c(1999,2002,2005,2008))\n\n##OLS line.\nline<-glm(NEI25coalagg$x~NEI25coalagg$Group.1)\nabline(line)\n\ndev.off()\n\n##Generally it looks like emissions from coal combustion-related sources have decreased with 2002 being an outlier year.\n",
+    "created" : 1443314936457.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3798809525",
+    "id" : "3C1E898D",
+    "lastKnownWriteTime" : 1443381029,
+    "path" : "C:/Users/TotallyNotDanny/OneDrive/R/Exploratory Data Analysis/Week 3/Course Project 2/plot4.R",
+    "project_path" : "plot4.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
